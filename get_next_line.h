@@ -6,6 +6,6 @@
 #  define  -D BUFFER_SIZE=42
 # endif
 
-int	counter(void);
+char *get_next_line(int fd);
 
 #endif
