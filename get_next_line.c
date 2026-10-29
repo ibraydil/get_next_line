@@ -12,5 +12,5 @@ char *get_next_line(int fd)
   if (n < 0)
     return NULL;
   buf[n] = '\0';
-  return ();
+  return (NULL); //!!!удалить
 }
