@@ -1,4 +1,5 @@
 #ifndef GET_NEXT_LINE_H
+# define
 
 
 # ifndef MAX_USERS
