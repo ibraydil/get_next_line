@@ -6,7 +6,7 @@
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 17:13:27 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/30 19:45:01 by dibrayev         ###   ########.fr       */
+/*   Updated: 2026/10/30 20:28:22 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*get_next_line(int fd)
 {
 	static char	*leftover;
-	char *tmp;
-	char *final_line;
+	char		*tmp;
+	char		*final_line;
 
 	leftover = read_to_leftover(fd, leftover);
 	if (leftover == NULL)
@@ -28,11 +28,11 @@ char	*get_next_line(int fd)
 	return (final_line);
 }
 
-char *get_line(char *leftover)
+char	*get_line(char *leftover)
 {
-	char *line;
-	int i;
-	int j;
+	char	*line;
+	int		i;
+	int		j;
 
 	i = index_position(leftover);
 	line = malloc(sizeof(char) * (i + 1));
@@ -48,15 +48,15 @@ char *get_line(char *leftover)
 	return (line);
 }
 
-char *cut_leftover(char *leftover)
+char	*cut_leftover(char *leftover)
 {
-	int i;
-	int j;
-	char *next_line;
+	int		i;
+	int		j;
+	char	*next_line;
 
 	i = index_position(leftover);
 	if (leftover[i] == '\0')
-    	return (NULL);
+		return (NULL);
 	next_line = malloc(sizeof(char) * (ft_strlen(leftover) - i + 1));
 	if (next_line == NULL)
 		return (NULL);
@@ -71,9 +71,9 @@ char *cut_leftover(char *leftover)
 	return (next_line);
 }
 
-int index_position(char *str)
+int	index_position(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0' && str[i] != '\n')
@@ -85,11 +85,11 @@ int index_position(char *str)
 	return (i);
 }
 
-char *read_to_leftover(int fd, char *leftover)
+char	*read_to_leftover(int fd, char *leftover)
 {
-	char    buf[BUFFER_SIZE + 1];
-	ssize_t n;
-	char *tmp;
+	char	buf[BUFFER_SIZE + 1];
+	ssize_t	n;
+	char	*tmp;
 
 	while (!ft_strchr(leftover, '\n'))
 	{
