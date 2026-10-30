@@ -6,7 +6,7 @@
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 16:45:38 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/30 19:45:27 by dibrayev         ###   ########.fr       */
+/*   Updated: 2026/10/30 20:28:38 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define  BUFFER_SIZE 42
+#  define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);
@@ -25,7 +25,7 @@ char	*cut_leftover(char *leftover);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
-int		index_position(char *str) ;
+int		index_position(char *str);
 char	*read_to_leftover(int fd, char *leftover);
 
 #endif
