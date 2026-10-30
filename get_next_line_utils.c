@@ -1,116 +1,81 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/15 17:13:27 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/30 21:15:51 by dibrayev         ###   ########.fr       */
+/*   Created: 2026/09/15 17:14:07 by dibrayev          #+#    #+#             */
+/*   Updated: 2026/10/30 21:17:09 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <unistd.h>
+#include <stdio.h>
 
-char	*get_next_line(int fd)
+size_t	ft_strlen(const char *str)
 {
-	static char	*leftover;
-	char		*tmp;
-	char		*final_line;
-	char		*buf;
+	size_t	len;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buf = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
-	if (buf == NULL)
-		return (NULL);
-	leftover = read_to_leftover(fd, leftover, buf);
-	free(buf);
-	if (leftover == NULL)
-		return (NULL);
-	final_line = get_line(leftover);
-	tmp = leftover;
-	leftover = cut_leftover(leftover);
-	free(tmp);
-	return (final_line);
-}
-
-char	*get_line(char *leftover)
-{
-	char	*line;
-	int		i;
-	int		j;
-
-	i = index_position(leftover);
-	line = malloc(sizeof(char) * (i + 1));
-	if (line == NULL)
-		return (NULL);
-	j = 0;
-	while (j < i)
+	len = 0;
+	if (str == NULL)
+		return (0);
+	while (*str)
 	{
-		line[j] = leftover[j];
-		j++;
+		len++;
+		str++;
 	}
-	line[j] = '\0';
-	return (line);
+	return (len);
 }
 
-char	*cut_leftover(char *leftover)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		i;
-	int		j;
-	char	*next_line;
-
-	i = index_position(leftover);
-	if (leftover[i] == '\0')
-		return (NULL);
-	next_line = malloc(sizeof(char) * (ft_strlen(leftover) - i + 1));
-	if (next_line == NULL)
-		return (NULL);
-	j = 0;
-	while (leftover[i])
-	{
-		next_line[j] = leftover[i];
-		j++;
-		i++;
-	}
-	next_line[j] = '\0';
-	return (next_line);
-}
-
-int	index_position(char *str)
-{
-	int	i;
+	size_t	i;
+	size_t	j;
+	char	*final_s;
+	size_t	len1;
+	size_t	len2;
 
 	i = 0;
-	while (str[i] != '\0' && str[i] != '\n')
+	j = 0;
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	final_s = malloc(sizeof(char) * (len1 + len2) + 1);
+	if (final_s == NULL)
+		return (NULL);
+	while (i < len1)
 	{
+		final_s[i] = s1[i];
 		i++;
 	}
-	if (str[i] == '\n')
-		i++;
-	return (i);
+	while (j < len2)
+	{
+		final_s[i + j] = s2[j];
+		j++;
+	}
+	final_s[i + j] = '\0';
+	return (final_s);
 }
 
-char	*read_to_leftover(int fd, char *leftover, char *buf)
+char	*ft_strchr(const char *s, int c)
 {
-	ssize_t	n;
-	char	*tmp;
+	int		i;
+	char	cc;
+	char	*ss;
 
-	while (!ft_strchr(leftover, '\n'))
+	i = 0;
+	cc = (char)c;
+	ss = (char *)s;
+	if (ss == NULL)
+		return (NULL);
+	while (ss[i])
 	{
-		n = read(fd, buf, BUFFER_SIZE);
-		if (n < 0)
-		{
-			free(leftover);
-			return (NULL);
-		}
-		if (n == 0)
-			break ;
-		buf[n] = '\0';
-		tmp = leftover;
-		leftover = ft_strjoin(tmp, buf);
-		free(tmp);
+		if (ss[i] == cc)
+			return (&ss[i]);
+		i++;
 	}
-	return (leftover);
+	if (cc == '\0')
+		return (&ss[i]);
+	return (NULL);
 }
