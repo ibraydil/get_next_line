@@ -6,7 +6,7 @@
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 17:13:27 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/30 20:28:22 by dibrayev         ###   ########.fr       */
+/*   Updated: 2026/10/30 20:39:56 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,15 @@ char	*get_next_line(int fd)
 	static char	*leftover;
 	char		*tmp;
 	char		*final_line;
+	char		*buf;
 
-	leftover = read_to_leftover(fd, leftover);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buf = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
+	if (buf == NULL)
+		return (NULL);
+	leftover = read_to_leftover(fd, leftover, buf);
+	free(buf);
 	if (leftover == NULL)
 		return (NULL);
 	final_line = get_line(leftover);
@@ -85,9 +92,8 @@ int	index_position(char *str)
 	return (i);
 }
 
-char	*read_to_leftover(int fd, char *leftover)
+char	*read_to_leftover(int fd, char *leftover, char *buf)
 {
-	char	buf[BUFFER_SIZE + 1];
 	ssize_t	n;
 	char	*tmp;
 
