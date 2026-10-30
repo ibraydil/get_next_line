@@ -6,7 +6,7 @@
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 16:45:38 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/30 20:40:29 by dibrayev         ###   ########.fr       */
+/*   Updated: 2026/10/30 20:48:34 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 66
 # endif
 
 char	*get_next_line(int fd);
