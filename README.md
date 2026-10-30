@@ -65,6 +65,7 @@ int main(int argc, char **argv)
 ```
 
 ```sh
+printf 'hello\nworld\nlast' > file.txt
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c -o gnl
 ./gnl file.txt          # read a file
 cat file.txt | ./gnl    # read from standard input
