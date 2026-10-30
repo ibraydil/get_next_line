@@ -6,7 +6,7 @@
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 17:14:07 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/30 19:45:45 by dibrayev         ###   ########.fr       */
+/*   Updated: 2026/10/30 20:28:55 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include <unistd.h>
 #include <stdio.h>
 
-size_t ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-  size_t len;
-  len = 0;
-  
-  if (str == NULL)
-    return 0;
-  while (*str)
-    {
-      len++;
-      str++;
-    }
-  return(len);
+	size_t	len;
+
+	len = 0;
+	if (str == NULL)
+		return (0);
+	while (*str)
+	{
+		len++;
+		str++;
+	}
+	return (len);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -34,8 +34,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 	char	*final_s;
-	size_t len1;
-	size_t len2;
+	size_t	len1;
+	size_t	len2;
 
 	i = 0;
 	j = 0;
@@ -46,13 +46,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	while (i < len1)
 	{
-    	final_s[i] = s1[i];
-    	i++;
+		final_s[i] = s1[i];
+		i++;
 	}
 	while (j < len2)
 	{
-    	final_s[i + j] = s2[j];
-    	j++;
+		final_s[i + j] = s2[j];
+		j++;
 	}
 	final_s[i + j] = '\0';
 	return (final_s);
@@ -68,7 +68,7 @@ char	*ft_strchr(const char *s, int c)
 	cc = (char)c;
 	ss = (char *)s;
 	if (ss == NULL)
-		return NULL;
+		return (NULL);
 	while (ss[i])
 	{
 		if (ss[i] == cc)
